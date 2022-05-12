@@ -13,13 +13,20 @@ def today_menu(menus):
     today = 'Monday'
     match today:
         case 'Monday':
-            for menu, desc in menus.items():
-                print(menu)
-                print(desc)
+            check_menu_type(menus)
         case 'Tuesday':
             print(today)
         case _:
             print("Today is not Monday or Tuesday")
+
+
+def check_menu_type(menus):
+    if type(menus) == str:
+        print(menus)
+    else:
+        for menu, desc in menus.items():
+            print(menu)
+            print(desc)
 
 
 def get_soup():
@@ -33,7 +40,7 @@ def find_vegan_menu(soup):
     menus_dict = {}
     no_vegan_str = 'The menus today are not vegan 😔'
     # get the first tab (that's usual today)
-    results = soup.find(id='menu-plan-tab3')
+    results = soup.find(id='menu-plan-tab1')
 
     menu_items = results.find_all(class_='menu-item')
     for menu_item in menu_items:
