@@ -1,25 +1,28 @@
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime as date
+from win10toast import ToastNotifier
+from plyer import notification
 
 URL = "https://technolino.sv-restaurant.ch/de/menuplan/"
+error = 'error'
+noti_title = 'MENSA HEUTE 🍴'
 
 
-# get the content of the id
-
-# TODO check if today is a week day or only search for a menu if its weekday or only send a request on Monday/Tuesday
 def today_menu(menus):
     # today = date.today().strftime("%A")
     today = 'Monday'
-    match today:
-        case 'Monday':
+
+    if menus == error:
+        return 'There is nothing in this week / Can be an error'
+    elif today == 'Monday' or today == 'Tuesday':
+        if isinstance(menus, dict):
             for menu, desc in menus.items():
-                print(menu)
-                print(desc)
-        case 'Tuesday':
-            print(today)
-        case _:
-            print("Today is not Monday or Tuesday")
+                return '🌻' + menu + '🌻' + '\n' + desc
+        else:
+            return menus
+    else:
+        return 'Today is not Monday or Tuesday'
 
 
 def get_soup():
@@ -32,10 +35,15 @@ def get_soup():
 def find_vegan_menu(soup):
     menus_dict = {}
     no_vegan_str = 'The menus today are not vegan 😔'
-    # get the first tab (that's usual today)
-    results = soup.find(id='menu-plan-tab3')
 
-    menu_items = results.find_all(class_='menu-item')
+    # get the first tab (that's usual today)
+    results = soup.find(id='menu-plan-tab1')
+
+    try:
+        menu_items = results.find_all(class_='menu-item')
+    except AttributeError:
+        return error
+
     for menu_item in menu_items:
         vegan = menu_item.find_next(class_='item-content').find(class_='label-info label-vegan')
         if vegan is not None:
@@ -54,7 +62,13 @@ def find_vegan_menu(soup):
 
 def main():
     menus = find_vegan_menu(get_soup())
-    today_menu(menus)
+    noti_message = today_menu(menus)
+
+    notification.notify(
+        title=noti_title,
+        message=noti_message,
+        timeout=10
+    )
 
 
 if __name__ == '__main__':
