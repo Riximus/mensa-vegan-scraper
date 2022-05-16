@@ -1,17 +1,16 @@
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime as date
-from win10toast import ToastNotifier
 from plyer import notification
 
 URL = "https://technolino.sv-restaurant.ch/de/menuplan/"
 error = 'error'
 noti_title = 'MENSA HEUTE 🍴'
+show_time = 15
 
 
 def today_menu(menus):
-    # today = date.today().strftime("%A")
-    today = 'Monday'
+    today = date.today().strftime("%A")
 
     if menus == error:
         return 'There is nothing in this week / Can be an error'
@@ -67,7 +66,7 @@ def main():
     notification.notify(
         title=noti_title,
         message=noti_message,
-        timeout=10
+        timeout=show_time
     )
 
 
