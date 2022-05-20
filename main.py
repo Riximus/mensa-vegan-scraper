@@ -47,6 +47,7 @@ def find_vegan_menu(soup):
     # get the first tab (that's usual today)
     results = soup.find(id='menu-plan-tab1')
 
+    # error handle if menu-plan-tab1 exists
     try:
         menu_items = results.find_all(class_='menu-item')
     except AttributeError:
