@@ -14,14 +14,14 @@ def today_menu(menus):
 
     if menus == error:
         return 'There is nothing in this week / Can be an error'
-    elif today == 'Monday' or today == 'Tuesday':
+    elif today == 'Monday':
         if isinstance(menus, dict):
             for menu, desc in menus.items():
                 return '🌻' + menu + '🌻' + '\n' + desc
         else:
             return menus
     else:
-        return 'Today is not Monday or Tuesday'
+        return 'Today is not Monday'
 
 
 def check_menu_type(menus):
