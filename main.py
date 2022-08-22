@@ -6,7 +6,7 @@ from plyer import notification
 URL = "https://technolino.sv-restaurant.ch/de/menuplan/"
 error = 'error'
 noti_title = 'MENSA HEUTE 🍴'
-show_time = 15
+show_time = 30
 
 
 def today_menu(menus):
