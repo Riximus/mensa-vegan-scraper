@@ -1,3 +1,5 @@
+import sys
+
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime as date
@@ -21,7 +23,7 @@ def today_menu(menus):
         else:
             return menus
     else:
-        return 'Today is not Monday'
+        return None
 
 
 def check_menu_type(menus):
@@ -71,13 +73,18 @@ def find_vegan_menu(soup):
 
 def main():
     menus = find_vegan_menu(get_soup())
+
+    # value_when_true if condition else value_when_false
     noti_message = today_menu(menus)
 
-    notification.notify(
-        title=noti_title,
-        message=noti_message,
-        timeout=show_time
-    )
+    # noti_message = today_menu(menus)
+    if noti_message is not None:
+        notification.notify(
+            title=noti_title,
+            message=noti_message,
+            timeout=show_time
+        )
+    quit()
 
 
 if __name__ == '__main__':
