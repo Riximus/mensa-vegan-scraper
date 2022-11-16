@@ -16,7 +16,7 @@ def today_menu(menus):
 
     if menus == error:
         return 'There is nothing in this week / Can be an error'
-    elif today == 'Monday':
+    elif today == 'Monday' or today == 'Wednesday':
         if isinstance(menus, dict):
             for menu, desc in menus.items():
                 return '🌻' + menu + '🌻' + '\n' + desc
