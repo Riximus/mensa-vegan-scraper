@@ -9,3 +9,8 @@ After checking the contents it will send a Windows Notification with the corresp
 Thanks to GeeksForGeeks Task Scheduler Tutorial I could set up a daily notification for the script.
 
 Link: [GeeksForGeeks - Schedule a Python Script to Run Daily](https://www.geeksforgeeks.org/schedule-a-python-script-to-run-daily/)
+
+# Using Gitmoji for more pleasant commit's!
+<a href="https://gitmoji.dev">
+  <img src="https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg?style=flat-square" alt="Gitmoji">
+</a>
